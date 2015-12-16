@@ -13,7 +13,7 @@ input_path = ARGV[0]
 if input_path == "."
 	input_path=Dir.pwd
 end
-files = "#{input_path}/*/*.swift"
+files = "#{input_path}/**/*.swift"
 
 
 Dir.glob(files) do  |swift_file|
