@@ -27,7 +27,9 @@ Dir.glob(files) do  |swift_file|
   contents.gsub!(/\/\/\K(\S)/, ' \1')             # Single-line comment should start with whitespace
   contents.gsub!(/^([^\?^\n]+)\K( :)/, ':')       # [colon-whitespace] Colon should have no spaces before it
   contents.gsub!(/(\S:)([^"\s])/, '\1 \2')        # [colon-whitespace] Colon should have exactly one space after it
-  contents.gsub!(/func \K([A-Z])/){ $1.downcase } # functions should start with lowercase
+  #contents.gsub!(/func \K([A-Z])/){ $1.downcase } # functions should start with lowercase
+  contents.gsub!(/switch \K\((.+)\)/, '\1')       # Switch expression should not be enclosed within parentheses
+  contents.gsub!(/}(\n[^\n])/, '}'"\n"'\1')       # Function should have at least one blank line after it
 
   File.open(swift_file, "w") { |file| 
     file.puts contents 
